@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+</head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script>
+    $( document ).ready(function() {
+        $("#class_id").on('change',function(){
+            var a = $("#class_id").val();
+            $.ajax({
+                type: "GET",
+                url: "http://127.0.0.1:8000/state_list/",
+                data: {
+                    country_id: a
+                },
+                success: function(response) {
+                    console.log(response);
+            }
+        });
+    });
+   
+});
+</script>
+<body>
+    Country :
+    <select id="class_id">
+        {% for country in country_list %} 
+        <option value="{{country.id}}">{{country.name}}</option> 
+        {% endfor %}
+    </select>
+    State : 
+    <select>
+
+        {% for state in state_list %} 
+        <option  value="{{state.id}}">{{state.name}}</option> 
+        {% endfor %}
+    </select>
+    City : 
+    <select>
+
+        {% for city in city_list %} 
+        <option value="{{city.name}}">{{city.name}}</option> 
+        {% endfor %}
+    </select> 
+    <span class="output"></span>
+</body>
+</html>
